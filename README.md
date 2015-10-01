@@ -1,7 +1,6 @@
-Editer le formulaire
-====================
+# Editer le formulaire
 
-Modifiez le fichier 'ElectroForm.md'.
+Modifiez le fichier *ElectroForm.md*.
 
 Pour voir le résultat, vous aurez besoin de [Pandoc](http://www.pandoc.org).
 
