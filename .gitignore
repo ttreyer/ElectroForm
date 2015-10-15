@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.out
+*.sw?
+
+*~
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+Desktop.ini
+Thumbs.db
+ehthumbs.db
