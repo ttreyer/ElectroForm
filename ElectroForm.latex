@@ -110,6 +110,22 @@
     \caption{Résumé des formules}
 \end{longtable}
 
+\section{Régime Sinusoïdal}
+
+\subsection{Formules}
+
+\paragraph{Valeur moyenne}
+\[ U_{moy} = \frac{1}{T} \int_0^T u(t) dt \]
+
+\paragraph{Valeur efficace}
+\[ U_{eff} = \sqrt{ \frac{1}{T} \int_0^T u^2(t) dt } \]
+
+\paragraph{Valeur max} ou valeur de crête
+\[ U_{max} = max\{ u(t) \} \]
+
+\paragraph{Valeur min}
+\[ U_{min} = min\{ u(t) \} \]
+
 \section{Lois de Kirchoff}
 
 \subsection{Loi des mailles}
