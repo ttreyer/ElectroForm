@@ -106,6 +106,18 @@
         \begin{minipage}[t]{0.25\columnwidth}\centering\strut
             \[L_{equ} = \frac{1}{ \sum_{i = 1}^n \frac{1}{L_i} }\]
         \strut\end{minipage}\tabularnewline
+        \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+            Phaseur
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[\underline{Z} = R\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[\underline{Z} = \frac{1}{j \omega C}\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[\underline{Z} = j \omega L\]
+        \strut\end{minipage}\tabularnewline
 
     \caption{Résumé des formules}
 \end{longtable}
