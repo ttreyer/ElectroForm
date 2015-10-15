@@ -1,0 +1,174 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue
+}
+
+\usepackage{tikz}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+
+\newenvironment{circuit}
+    {\begin{circuitikz}[scale=2]\NoAutoSpacing}
+    {\end{circuitikz}}
+
+\title{Formulaire d'Électrotechnique}
+\author{Thierry Treyer \href{mailto:thierry.treyer@epfl.ch}{thierry.treyer@epfl.ch}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Cheatsheet}
+
+\begin{longtable}[c]{@{}c|ccc@{}}
+    \toprule
+        \begin{minipage}[b]{0.13\columnwidth}\centering\strut
+            Formules
+        \strut\end{minipage} &
+        \begin{minipage}[b]{0.25\columnwidth}\centering\strut
+            Résistance
+        \strut\end{minipage} &
+        \begin{minipage}[b]{0.25\columnwidth}\centering\strut
+            Capacité
+        \strut\end{minipage} &
+        \begin{minipage}[b]{0.25\columnwidth}\centering\strut
+            Inductance
+        \strut\end{minipage}\tabularnewline
+    \midrule
+    \endhead
+        \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+            Grandeur
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            R {[}\(\Omega\){]}~
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            C {[}F{]}
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            L {[}H{]}
+        \strut\end{minipage}\tabularnewline
+        \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+            Tension
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[U = R I\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[U = \int_0^T \frac{I}{C} dt\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[U = L \frac{dI}{dt}\]
+        \strut\end{minipage}\tabularnewline
+        \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+            Courant
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[I = \frac{U}{R}\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[I = \frac{dQ}{dt} = C \frac{dU}{dt}\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[I = \int_0^T \frac{U}{L} dt\]
+        \strut\end{minipage}\tabularnewline
+        \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+            Série
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[R_{equ} = \sum_{i = 1}^n R_i\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[C_{equ} = \frac{1}{ \sum_{i = 1}^n \frac{1}{C_i} }\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[L_{equ} = \sum_{i = 1}^n L_i\]
+        \strut\end{minipage}\tabularnewline
+        \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+            Parallèle
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[R_{equ} = \frac{1}{ \sum_{i = 1}^n \frac{1}{R_i} }\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[C_{equ} = \sum_{i = 1}^n C_i\]
+        \strut\end{minipage} &
+        \begin{minipage}[t]{0.25\columnwidth}\centering\strut
+            \[L_{equ} = \frac{1}{ \sum_{i = 1}^n \frac{1}{L_i} }\]
+        \strut\end{minipage}\tabularnewline
+
+    \caption{Résumé des formules}
+\end{longtable}
+
+\section{Lois de Kirchoff}
+
+\subsection{Loi des mailles}
+
+À partir d'un point quelconque du circuit, on peut former une boucle où la
+somme algébrique des tensions de chacuns des éléments traversé est égal à zéro.
+
+Cette loi s'applique quelque soit le nombre de sources dans le circuit.
+
+\begin{figure}[h]
+    \begin{circuit}
+        \draw (0,0) to [short] (3,0)
+            to [R=$R_3$] (3,1)
+            to [short] (2,1)
+            to [R=$R_1$] (0,1)
+            to [V=$U$] (0,0);
+
+        \draw (2,0) to [R=$R_2$, *-*] (2,1);
+
+        \draw[thin, ->, >= triangle 45] (1,0.35) node {$M_1$} ++ (135:0.2) arc (135:-135:0.2);
+
+        \draw[xshift=3.15cm, yshift=0.5cm]
+            node[right, text width = 6cm] {
+                \[ U = U_{R_1} + U_{R_2} \]
+                \[ U - U_{R_1} - U_{R_2} = 0 \]
+            };
+    \end{circuit}
+
+    \caption{Tensions dans une maille}
+\end{figure}
+
+\subsection{Loi des Nœuds}
+
+La somme algébrique des courants dans un nœud est égal à zéro.
+La somme des courants entrant dans un nœud est égal à la somme des courants sortant.
+
+\begin{figure}[h]
+    \begin{circuit}
+        \draw (0,0) to[short, i=$I_1$, *-] (-0.75, -0.75);
+        \draw (0,0) to[short, i=$I_2$, *-] ( 0.75, -0.75);
+        \draw (0,0) to[short, i=$I_3$, *-] (-0.75,  0.75);
+        \draw (0.75,0.75) to[short, i=$I_4$, -*] ( 0,  0);
+
+        \draw[xshift=2cm]
+            node[right, text width = 6cm] {
+                \[ I_4 = I_1 + I_2 + I_3 \]
+                \[ I_4 - I_1 - I_2 - I_3 = 0 \]
+            };
+    \end{circuit}
+
+    \caption{Courants dans un nœud}
+\end{figure}
+
+\section{Thévenin \& Norton}
+
+Tout circuit linéaire, quelque soit sa complexité, peut être remplacé par une
+source de tension réelle (Thévenin) ou une source de courant réelle (Norton).
+
+Combiné avec les transformations source tension $\Leftrightarrow$ source courant,
+on peut réduire par étapes successives un circuit complexe 
+
+\end{document}
