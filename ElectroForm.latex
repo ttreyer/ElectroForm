@@ -145,6 +145,9 @@
 \paragraph{Valeur min}
 \[ U_{min} = min\{ u(t) \} \]
 
+\paragraph{Puissance}
+\[ P_R = U I = \frac{ U^2 }{ R } = R I^2 \]
+
 \subsection{Valeurs efficaces des signaux courants}
 \begin{tabular}{c|c|c}
     Sinusoïdal & Triangulaire & Carré \\
