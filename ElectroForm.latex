@@ -132,11 +132,35 @@
 \paragraph{Valeur efficace}
 \[ U_{eff} = \sqrt{ \frac{1}{T} \int_0^T u^2(t) dt } \]
 
+\paragraph{Mémo:} linéarisation de \(cos^2\) et \(sin^2\)
+\[
+    cos^2(x) = \frac{ 1 + cos(2x) }{2}
+    \qquad
+    sin^2(x) = \frac{ 1 - cos(2x) }{2}
+\]
+
 \paragraph{Valeur max} ou valeur de crête
 \[ U_{max} = max\{ u(t) \} \]
 
 \paragraph{Valeur min}
 \[ U_{min} = min\{ u(t) \} \]
+
+\subsection{Valeurs efficaces des signaux courants}
+\begin{tabular}{c|c|c}
+    Sinusoïdal & Triangulaire & Carré \\
+
+    \begin{minipage}[t]{0.25\columnwidth}
+        \[ U_{eff} = \frac{ U_{max} }{ \sqrt{2} } \]
+    \end{minipage} &
+
+    \begin{minipage}[t]{0.25\columnwidth}
+        \[ U_{eff} = \frac{ U_{max} }{ \sqrt{3} } \]
+    \end{minipage} &
+
+    \begin{minipage}[t]{0.25\columnwidth}
+        \[ U_{eff} = U_{max} \]
+    \end{minipage} \\
+\end{tabular}
 
 \section{Lois de Kirchoff}
 
