@@ -226,4 +226,65 @@ source de tension réelle (Thévenin) ou une source de courant réelle (Norton).
 Combiné avec les transformations source tension $\Leftrightarrow$ source courant,
 on peut réduire par étapes successives un circuit complexe 
 
+% Lorsqu'on élimine une source de tension, on la remplace par un court-circuit. \newline
+% Lorsqu'on élimine une source de courant, on la remplace par un circuit ouvert.
+
+% Je pige pas assez ces techniques pour les résumer, alors je met en commentaire cette partie.
+\iffalse
+\subsection{Analyse Thévenin}
+
+\begin{enumerate}
+    \item Obtenir la valeur de la résistance
+    \begin{enumerate}
+        \item Éliminer les sources de courant et de tension
+        \item Mesurer la résistance aux bornes du dipôle
+    \end{enumerate}
+
+    \item Déterminer la tension aux bornes du dipôle
+\end{enumerate}
+
+\subsection{Analyse Norton}
+
+\begin{enumerate}
+    \item Obtenir la valeur de la résistance
+    \begin{enumerate}
+        \item Éliminer les sources de courant et de tension
+        \item Mesurer la résistance aux bornes du dipôle
+    \end{enumerate}
+
+    \item Déterminer le courant aux bornes du dipôle
+\end{enumerate}
+\fi
+
+\begin{figure}[h]
+    \begin{circuit}
+        \draw (1,0)
+            to [R=$R_{out}$] (0,0)
+            to [short] (0,-0.5)
+            to [V=$U_{Th}$] (0,-1.5)
+            to [short] (1,-1.5);
+
+        \draw[yshift=-2cm] node [right, text width=2cm] {
+            \[ I_{No} = \frac{U_{Th}}{R_{out}} \]
+        };
+
+        \draw[xshift=2.25cm, yshift=-0.75cm] node [left, text width=1cm] { $\Leftrightarrow$ };
+
+        \draw[xshift=3cm] (1.5,-1.5)
+            to [short] (0,-1.5)
+            to [I=$I_{No}$] (0,0)
+            to [short] (1.5,0);
+
+        \draw[xshift=3cm]
+            (1,0) to [R=$R_{out}$, *-*] (1,-1.5);
+
+        \draw[xshift=3cm, yshift=-2cm] node [right, text width=2cm] {
+            \[ U_{Th} = R_{out} I_{No} \]
+        };
+
+    \end{circuit}
+
+    \caption{Transformation source de tension $\Leftrightarrow$ source de courant}
+\end{figure}
+
 \end{document}
