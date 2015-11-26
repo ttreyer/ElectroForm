@@ -148,6 +148,9 @@
 \paragraph{Puissance}
 \[ P_R = U I = \frac{ U^2 }{ R } = R I^2 \]
 
+\paragraph{Formule d'Euler}
+\[ z = a + jb = r e^{j\theta} = r \cos \theta + j r \sin \theta \]
+
 \subsection{Valeurs efficaces des signaux courants}
 \begin{tabular}{c|c|c}
     Sinusoïdal & Triangulaire & Carré \\
@@ -285,6 +288,48 @@ on peut réduire par étapes successives un circuit complexe
     \end{circuit}
 
     \caption{Transformation source de tension $\Leftrightarrow$ source de courant}
+\end{figure}
+
+\section{Phaseurs}
+
+Le phaseur permet de décrire le comportement de circuit RLC en faisant abstraction du temps.
+
+\[
+  x(t) = \sqrt{2} X \cos(\omega t + \theta)
+  \quad \Rightarrow \quad
+  \underline{x} = \sqrt{2} X e^{j(\omega t + \theta)}
+\]
+
+Où $\omega = 2 \pi f$, quand $f$ est la fréquence des sources.
+
+On peut alors caractériser toutes les valeurs du circuit avec sa valeur efficace (amplitude) $X$
+et son déphasage par rapport aux sources $\theta$.
+
+\subsection{Diagramme de phaseur}
+
+On peut déterminer le comportement d'un phaseur $\underline{X}$ selon la fréquence en utilisant
+une diagramme de phaseur. On fait le graphique du phaseur sur un plan de Gauss en faisant
+varier la fréquence $\omega$.
+
+\begin{figure}[h]
+  \begin{tikzpicture}
+    \draw[->] (-0.2, 0) -- (2.2, 0) node[right] {$Re$};
+    \draw[->] (0, -1.2) -- (0, 1.2) node[above] {$Im$};
+    \draw[->, color=red, line width=0.5mm] (0, 0) -- (1.4, 0) node[above] {$R$};
+    \draw[yshift=-1.6cm, color=red] node [right, text width=2cm] { Résistance };
+
+    \draw[->, xshift=4.5cm] (-0.2, 0) -- (2.2, 0) node[right] {$Re$};
+    \draw[->, xshift=4.5cm] (0, -1.2) -- (0, 1.2) node[above] {$Im$};
+    \draw[->, xshift=4.5cm, color=green, line width=0.5mm] (0, 0) -- (0, 0.8) node[right] {$j \omega L$};
+    \draw[xshift=4.5cm, yshift=-1.6cm, color=green] node [right, text width=2cm] { Inductance };
+
+    \draw[->, xshift=9cm] (-0.2, 0) -- (2.2, 0) node[right] {$Re$};
+    \draw[->, xshift=9cm] (0, -1.2) -- (0, 1.2) node[above] {$Im$};
+    \draw[->, xshift=9cm, color=blue, line width=0.5mm] (0, 0) -- (0, -0.8) node[right] {$\frac{-j}{\omega C}$};
+    \draw[xshift=9cm, yshift=-1.6cm, color=blue] node [right, text width=2cm] { Capacité };
+  \end{tikzpicture}
+
+  \caption{Différientiation du type de phaseur grâce à son diagramme}
 \end{figure}
 
 \end{document}
