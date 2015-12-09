@@ -393,4 +393,37 @@ et $U_T$ est la variable d'agitation thermodynamique qui vaut $26 [mV]$ à 27 de
 
 \[ U_{S1}(t) = \frac{U_{AC}(t) R_d}{R_d + R_1} \]
 
+\section{Transistors}
+
+\begin{figure}[h]
+  \begin{circuit}
+    \draw
+      (0,0) node[npn](trs){}
+        (trs.B) to [R=$R_B$] (-1.5,0) to [V=$U_{IN}$, -*] (-1.5,-1.5)
+        (trs.E) to [R=$R_E$, -*] (0,-1.5)
+        (trs.C) to [R=$R_C$, -*] (0, 1.5);
+
+  \end{circuit}
+
+  \caption{Schéma complet d'un transistor}
+\end{figure}
+
+\subsection{Formules de base}
+
+\[ I_C = \beta I_B \]
+
+\[ I_E = I_B + I_C \]
+
+\[ IC = I_S e^{ \frac{U_BE}{U_T} } \]
+
+\subsection{Recette}
+
+\begin{enumerate}
+  \item $U_{IN} > U_j$?
+  \item Calculer $I_B$; complexe si $R_E$ existe
+  \item Calculer $I_C$
+  \item Calculer $U_E$ et $U_C$
+  \item Vérifier que $V_{BC} < 0$, sinon transistor saturé
+\end{enumerate}
+
 \end{document}
