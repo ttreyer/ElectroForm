@@ -7,6 +7,9 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 
+\usepackage{amsmath}
+\usepackage{pdfpages}
+
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -173,7 +176,7 @@
 \subsection{Loi des mailles}
 
 À partir d'un point quelconque du circuit, on peut former une boucle où la
-somme algébrique des tensions de chacuns des éléments traversé est égal à zéro.
+somme algébrique des tensions de chacun des éléments traversé est égal à zéro.
 
 Cette loi s'applique quelque soit le nombre de sources dans le circuit.
 
@@ -329,7 +332,61 @@ varier la fréquence $\omega$.
     \draw[xshift=9cm, yshift=-1.6cm, color=blue] node [right, text width=2cm] { Capacité };
   \end{tikzpicture}
 
-  \caption{Différientiation du type de phaseur grâce à son diagramme}
+  \caption{Différentiation du type de phaseur grâce à son diagramme}
 \end{figure}
+
+\section{Saut indiciel}
+
+Le saut indiciel est un changement brusque de tension qui se voit
+typiquement avec des signaux carrés.
+
+\subsection{Recette pour signaux carrés}
+
+\subsubsection{Déterminer la constante $\tau$:}
+
+Court-circuiter $V_{in}$ et déterminer la résistance équivalente vue par la capacité.
+On a alors: $\tau = C R_{eq}$.
+
+\subsubsection{S'assurer que $\tau$ est suffisamment petit}
+
+Pour un signal carré où un cycle prend $T$ secondes, il faut s'assurer d'avoir la relation suivante:
+
+\[ \tau \leq \frac{T}{2} \]
+
+Sinon, la capacité ne se retrouvera pas à son état initial après un cycle.
+Comme cela complique le travail, ce n'est pas abordé dans ce formulaire.
+
+\subsubsection{Analyse en quatre temps}
+
+\includepdf[pages={1}]{AnalyseImpulsions.pdf}
+
+\section{Diode}
+
+\subsection{Formule exponentielle}
+
+Ne pas utiliser cette formule avec $U_D = 0.7 V$: l'approximation sera trop grande.
+
+\[ I_D = I_S e^{ \frac{U_D}{n U_R} } \]
+
+où $I_S$ est le courant de saturation inverse.
+C'est une valeur normalement donnée qui varie entre $10^{-13} A$ et $10^{-15} A$.
+
+\subsection{Recette: AC et DC}
+
+\subsubsection{Calcul de la polarisation}
+
+\[ \text{Tension: } U_{D0} = U_j = 0.7 [V] \]
+\[ \text{Courant: } I_0 = \frac{U_{DC} - U_j}{R_1} \]
+
+\subsubsection{Calcul $R_d$}
+
+\[ R_d = \frac{n U_T}{I_0} \]
+
+où $n$ est le facteur d'idéalité qui varie entre 1 et 2,
+et $U_T$ est la variable d'agitation thermodynamique qui vaut $26 [mV]$ à 27 degrés centigrades.
+
+\subsubsection{Calcul des variations}
+
+\[ U_{S1}(t) = \frac{U_{AC}(t) R_d}{R_d + R_1} \]
 
 \end{document}
