@@ -364,12 +364,16 @@ Comme cela complique le travail, ce n'est pas abordé dans ce formulaire.
 
 \subsection{Formule exponentielle}
 
-Ne pas utiliser cette formule avec $U_D = 0.7 V$: l'approximation sera trop grande.
+Attention, risque d'aproximation avec cette formule!
+Ne pas utiliser avec la valeur par défaut $U_D = 0.7V$!
 
-\[ I_D = I_S e^{ \frac{U_D}{n U_R} } \]
+Cette formule relie le courant de la diode à sa tension.
 
-où $I_S$ est le courant de saturation inverse.
-C'est une valeur normalement donnée qui varie entre $10^{-13} A$ et $10^{-15} A$.
+\[ I_D = I_S e^{ \frac{U_D}{n U_T} } \]
+
+où $n$ est le facteur d'idéalité qui varie entre 1 et 2,
+et $U_T$ est la variable d'agitation thermodynamique qui vaut $26 [mV]$ à 27 degrés centigrades.
+et $I_S$ est le courant de saturation inverse (normalement donnée et qui varie entre $10^{-13} A$ et $10^{-15} A$).
 
 \subsection{Recette: AC et DC}
 
