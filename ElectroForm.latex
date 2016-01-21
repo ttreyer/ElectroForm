@@ -4,6 +4,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 
+\usepackage[margin=3.6cm]{geometry}
+
 \usepackage{booktabs}
 \usepackage{longtable}
 
@@ -335,95 +337,129 @@ varier la fréquence $\omega$.
   \caption{Différentiation du type de phaseur grâce à son diagramme}
 \end{figure}
 
-\section{Saut indiciel}
-
-Le saut indiciel est un changement brusque de tension qui se voit
-typiquement avec des signaux carrés.
-
-\subsection{Recette pour signaux carrés}
-
-\subsubsection{Déterminer la constante $\tau$:}
-
-Court-circuiter $V_{in}$ et déterminer la résistance équivalente vue par la capacité.
-On a alors: $\tau = C R_{eq}$.
-
-\subsubsection{S'assurer que $\tau$ est suffisamment petit}
-
-Pour un signal carré où un cycle prend $T$ secondes, il faut s'assurer d'avoir la relation suivante:
-
-\[ \tau \leq \frac{T}{2} \]
-
-Sinon, la capacité ne se retrouvera pas à son état initial après un cycle.
-Comme cela complique le travail, ce n'est pas abordé dans ce formulaire.
-
-\subsubsection{Analyse en quatre temps}
-
-\includepdf[pages={1}]{AnalyseImpulsions.pdf}
-
-\section{Diode}
-
-\subsection{Formule exponentielle}
-
-Attention, risque d'aproximation avec cette formule!
-Ne pas utiliser avec la valeur par défaut $U_D = 0.7V$!
-
-Cette formule relie le courant de la diode à sa tension.
-
-\[ I_D = I_S e^{ \frac{U_D}{n U_T} } \]
-
-où $n$ est le facteur d'idéalité qui varie entre 1 et 2,
-et $U_T$ est la variable d'agitation thermodynamique qui vaut $26 [mV]$ à 27 degrés centigrades.
-et $I_S$ est le courant de saturation inverse (normalement donnée et qui varie entre $10^{-13} A$ et $10^{-15} A$).
-
-\subsection{Recette: AC et DC}
-
-\subsubsection{Calcul de la polarisation}
-
-\[ \text{Tension: } U_{D0} = U_j = 0.7 [V] \]
-\[ \text{Courant: } I_0 = \frac{U_{DC} - U_j}{R_1} \]
-
-\subsubsection{Calcul $R_d$}
-
-\[ R_d = \frac{n U_T}{I_0} \]
-
-où $n$ est le facteur d'idéalité qui varie entre 1 et 2,
-et $U_T$ est la variable d'agitation thermodynamique qui vaut $26 [mV]$ à 27 degrés centigrades.
-
-\subsubsection{Calcul des variations}
-
-\[ U_{S1}(t) = \frac{U_{AC}(t) R_d}{R_d + R_1} \]
-
-\section{Transistors}
+\section{Tripôles}
 
 \begin{figure}[h]
   \begin{circuit}
-    \draw
-      (0,0) node[npn](trs){}
-        (trs.B) to [R=$R_B$] (-1.5,0) to [V=$U_{IN}$, -*] (-1.5,-1.5)
-        (trs.E) to [R=$R_E$, -*] (0,-1.5)
-        (trs.C) to [R=$R_C$, -*] (0, 1.5);
+    \draw (0,0) node[above=1.4mm] {$1$}
+      to [R=$Z_1$, o-*] ++(1,0)
+      to [R=$Z_2$, *-o] ++(1,0)
+        node[above=1.4mm] {$2$};
+
+    \draw (1,0) to [R=$Z_3$, *-o] ++(0,-1) node[below=1.4mm] {$3$};
+
+    \draw[xshift=4cm] (0,0) node[above=1.4mm] {$1$}
+      to [R=$Z_{12}$, o-o] ++(1,0)
+      to [R=$Z_{23}$, o-]  ++(0,-1)
+      to [short] ++(-1,0)
+      to [R=$Z_{31}$, -o] ++(0,+1);
+
+    \draw[xshift=4cm] (.5,-1)
+      to [short, -o] ++(0,-0.25) node[below=1.4mm] {$3$};
 
   \end{circuit}
 
-  \caption{Schéma complet d'un transistor}
+  \caption{Conversion triangle-étoile}
 \end{figure}
 
-\subsection{Formules de base}
+\begin{align*}
+  Z_{12} &= \frac{Z_1 Z_2 + Z_2 Z_3 + Z_3 Z_1}{Z_3} & Z_1 &= \frac{Z_{12} Z_{31}}{Z_{12} + Z_{23} + Z_{31}} \\
+  Z_{23} &= \frac{Z_1 Z_2 + Z_2 Z_3 + Z_3 Z_1}{Z_1} & Z_2 &= \frac{Z_{12} Z_{23}}{Z_{12} + Z_{23} + Z_{31}} \\
+  Z_{31} &= \frac{Z_1 Z_2 + Z_2 Z_3 + Z_3 Z_1}{Z_2} & Z_3 &= \frac{Z_{23} Z_{31}}{Z_{12} + Z_{23} + Z_{31}}
+\end{align*}
 
-\[ I_C = \beta I_B \]
-
-\[ I_E = I_B + I_C \]
-
-\[ IC = I_S e^{ \frac{U_BE}{U_T} } \]
-
-\subsection{Recette}
-
-\begin{enumerate}
-  \item $U_{IN} > U_j$?
-  \item Calculer $I_B$; complexe si $R_E$ existe
-  \item Calculer $I_C$
-  \item Calculer $U_E$ et $U_C$
-  \item Vérifier que $V_{BC} < 0$, sinon transistor saturé
-\end{enumerate}
+% \section{Saut indiciel}
+% 
+% Le saut indiciel est un changement brusque de tension qui se voit
+% typiquement avec des signaux carrés.
+% 
+% \subsection{Recette pour signaux carrés}
+% 
+% \subsubsection{Déterminer la constante $\tau$:}
+% 
+% Court-circuiter $V_{in}$ et déterminer la résistance équivalente vue par la capacité.
+% On a alors: $\tau = C R_{eq}$.
+% 
+% \subsubsection{S'assurer que $\tau$ est suffisamment petit}
+% 
+% Pour un signal carré où un cycle prend $T$ secondes, il faut s'assurer d'avoir la relation suivante:
+% 
+% \[ \tau \leq \frac{T}{2} \]
+% 
+% Sinon, la capacité ne se retrouvera pas à son état initial après un cycle.
+% Comme cela complique le travail, ce n'est pas abordé dans ce formulaire.
+% 
+% \subsubsection{Analyse en quatre temps}
+% 
+% \includepdf[pages={1}]{AnalyseImpulsions.pdf}
+% 
+% \section{Diode}
+% 
+% \subsection{Formule exponentielle}
+% 
+% Attention, risque d'aproximation avec cette formule!
+% Ne pas utiliser avec la valeur par défaut $U_D = 0.7V$!
+% 
+% Cette formule relie le courant de la diode à sa tension.
+% 
+% \[ I_D = I_S e^{ \frac{U_D}{n U_T} } \]
+% 
+% où $n$ est le facteur d'idéalité qui varie entre 1 et 2,
+% et $U_T$ est la variable d'agitation thermodynamique qui vaut $26 [mV]$ à 27 degrés centigrades.
+% et $I_S$ est le courant de saturation inverse (normalement donnée et qui varie entre $10^{-13} A$ et $10^{-15} A$).
+% 
+% \subsection{Recette: AC et DC}
+% 
+% \subsubsection{Calcul de la polarisation}
+% 
+% \[ \text{Tension: } U_{D0} = U_j = 0.7 [V] \]
+% \[ \text{Courant: } I_0 = \frac{U_{DC} - U_j}{R_1} \]
+% 
+% \subsubsection{Calcul $R_d$}
+% 
+% \[ R_d = \frac{n U_T}{I_0} \]
+% 
+% où $n$ est le facteur d'idéalité qui varie entre 1 et 2,
+% et $U_T$ est la variable d'agitation thermodynamique qui vaut $26 [mV]$ à 27 degrés centigrades.
+% 
+% \subsubsection{Calcul des variations}
+% 
+% \[ U_{S1}(t) = \frac{U_{AC}(t) R_d}{R_d + R_1} \]
+% 
+% \section{Transistors}
+% 
+% \begin{figure}[h]
+%   \begin{circuit}
+%     \draw
+%       (0,0) node[npn](trs){}
+%         (trs.B) to [R=$R_B$] (-1.5,0) to [V=$U_{IN}$, -*] (-1.5,-1.5)
+%         (trs.E) to [R=$R_E$, -*] (0,-1.5)
+%         (trs.C) to [R=$R_C$, -*] (0, 1.5);
+%   \end{circuit}
+% 
+%   \caption{Schéma complet d'un transistor}
+% \end{figure}
+% 
+% \subsection{Formules de base}
+% 
+% \[ I_C = \beta I_B \]
+% 
+% \[ I_E = I_B + I_C \]
+% 
+% \[ I_C = I_S e^{ \frac{U_BE}{U_T} } \]
+% 
+% \[ I_B = \frac{ U_{IN} - U_j }{ R_B + \beta R_E } \]
+% 
+% \subsection{Recette}
+% 
+% \begin{enumerate}
+%   \item $U_{IN} > U_j$?
+%   \item \[ I_B = \frac{ U_{IN} - U_j }{ R_B + \beta R_E } \]
+%   \item \[ I_C \approx I_E \approx \beta I_B \]
+%   \item Calculer $U_{R_E} = R_E I_E$ et $U_{R_C} = R_C I_C$
+%   \item Vérifier que $U_{R_C} + U_{R_E} < V_{CC}$, sinon transistor saturé
+%   \item Si saturé, supprimer le transistor, court-circuiter C et E et recalculer
+%         \[ I_C = \frac{ V_{CC} }{ R_C + R_E } \]
+% \end{enumerate}
 
 \end{document}
